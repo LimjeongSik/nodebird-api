@@ -8,6 +8,9 @@ const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
 
 dotenv.config();
+
+const v1 = require("./routes/v1");
+const v2 = require("./routes/v2");
 const authRouter = require("./routes/auth");
 const indexRouter = require("./routes");
 const { sequelize } = require("./models");
@@ -49,6 +52,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use("/v1", v1);
+app.use("/v2", v2);
 app.use("/auth", authRouter);
 app.use("/", indexRouter);
 
